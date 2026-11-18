@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="theme-color" content="#2556d9">
+        <title>Siu Đen Ny | JavaScript Portfolio</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+        <style>
+            :root {
+                --blue: #2556d9;
+                --deep: #12347f;
+                --ink: #192a59;
+                --cream: #fff9e9;
+                --orange: #ff9f1c;
+                --yellow: #ffe46c;
+                --mint: #a8f2ad;
+                --lavender: #cfb8ff;
+                --pink: #ffd4e5;
+                --paper: #f9f4e8;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
+
+            body {
+                margin: 0;
+                color: var(--ink);
+                background: var(--paper);
+                font-family: 'Nunito', Arial, sans-serif;
+            }
+
+            a {
+                color: inherit;
+            }
+
+            button, a {
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            a:focus-visible {
+                outline: 3px dashed var(--orange);
+                outline-offset: 5px;
+            }
+
+            .wrap {
+                max-width: 1220px;
+                width: min(92%, 1220px);
+                margin-inline: auto; }
+
+            .topbar {
+                background: var(--cream);
+                border-bottom: 3px solid var(--ink);
+                position: relative;
+                z-index: 10;
+            }
+
+            .topbar-inner {
+                min-height: 80px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 18px;
+            }
+
+            .logo {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                text-decoration: none;
+                font-weight: 900;
+                font-size: 19px;
+            }
+
+            .logo-mark {
+                width: 42px;
+                height: 42px;
+                background: var(--orange);
+                border: 3px solid var(--ink);
+                border-radius: 13px;
+                display: grid;
+                place-items: center;
+                transform: rotate(-9deg);
+                box-shadow: 4px 4px 0 var(--ink);
+                font-family: 'Baloo 2', cursive;
+                font-size: 24px;
+            }
+
+            .nav {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: clamp(10px, 2.4vw, 30px);
+                font-weight: 900;
+                font-size: 13px;
+                letter-spacing: .5px;
+            }
+
+            .nav a {
+                text-decoration: none;
+            }
+
+            .nav a:hover {
+                color: var(--blue);
+            }
+
+            .nav .nav-cta {
+                border: 2px solid var(--ink);
+                border-radius: 50px;
+                background: var(--yellow);
+                padding: 10px 17px;
+                box-shadow: 4px 4px 0 var(--ink);
+            }
+
+            .hero {
+                position: relative;
+                background: var(--blue);
+                overflow: hidden;
+                border-bottom: 4px solid var(--ink);
+            }
+
+            .hero:before {
+                content: '';
+                pointer-events: none;
+                position: absolute;
+                inset: 0;
+                background: repeating-linear-gradient(0deg, transparent 0 45px, #ffffff16 46px 47px), repeating-linear-gradient(90deg, transparent 0 45px, #ffffff16 46px 47px);
+                opacity: .55;
+            }
+
+            .hero:after {
+                content: '';
+                pointer-events: none;
+                position: absolute;
+                width: 55vw;
+                height: 55vw;
+                max-width: 740px;
+                max-height: 740px;
+                right: -260px;
+                top: -315px;
+                border-radius: 50%;
+                border: 4px dashed #ffffff3a;
+            }
+
+            .hero-inner {
+                min-height: 635px;
+                padding: 58px 0 82px;
+                position: relative;
+                isolation: isolate;
+            }
+
+            .hero-eyebrow {
+                position: relative;
+                z-index: 5;
+                color: var(--cream);
+                font-weight: 900;
+                letter-spacing: 3px;
+                font-size: 15px;
+                text-transform: uppercase;
+                margin: 4px 0 18px 20px;
+            }
+
+            .headline {
+                position: relative;
+                z-index: 3;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0;
+                margin: 10px 0 0;
+                line-height: .88;
+                font-family: 'Baloo 2', Impact, sans-serif;
+                font-weight: 800;
+                font-size: clamp(92px, 13.5vw, 191px);
+                letter-spacing: -8px;
+            }
+
+            .headline span {
+                display: block;
+                background: #fffdf7;
+                color: var(--orange);
+                -webkit-text-stroke: 1px var(--orange);
+                padding: .09em .14em .015em;
+                border: 3px solid var(--ink);
+                box-shadow: 12px 13px 0 #0f327f;
+                text-shadow: 4px 5px 0 #f3c35c;
+            }
+
+            .headline span:first-child {
+                transform: rotate(-5deg);
+                margin-left: 3%;
+            }
+
+            .headline span:last-child {
+                transform: rotate(3deg);
+                margin-left: 16%;
+                margin-top: 10px;
+            }
+
+            .hero-desc {
+                max-width: 580px;
+                position: relative;
+                z-index: 5;
+                margin: 40px 0 0 30px;
+                color: white;
+                font-weight: 800;
+                font-size: clamp(15px, 1.8vw, 21px);
+            }
+
+            .hero-tag {
+                position: absolute;
+                z-index: 4;
+                display: grid;
+                place-items: center;
+                text-align: center;
+                font-family: 'Baloo 2', cursive;
+                font-weight: 800;
+                line-height: 1;
+                border: 4px solid var(--ink);
+                box-shadow: 9px 9px 0 #103077;
+            }
+
+            .hero-tag--year {
+                right: 4%;
+                top: 9%;
+                background: var(--yellow);
+                width: 166px;
+                height: 166px;
+                border-radius: 50%;
+                transform: rotate(17deg);
+                font-size: 29px;
+            }
+
+            .hero-tag--js {
+                right: 8%;
+                bottom: 14%;
+                background: var(--mint);
+                width: 155px;
+                height: 122px;
+                border-radius: 27px;
+                transform: rotate(-16deg);
+                font-size: 61px;
+            }
+
+            .hero-tag--web {
+                right: 25%;
+                top: 23%;
+                background: var(--pink);
+                width: 124px;
+                height: 104px;
+                border-radius: 24px;
+                transform: rotate(17deg);
+                font-size: 30px;
+            }
+
+            .burst {
+                position: absolute;
+                display: block;
+                line-height: 1;
+                z-index: 4;
+                filter: drop-shadow(4px 6px 0 var(--ink));
+                -webkit-text-stroke: 2px var(--ink);
+            }
+
+            .burst.one {
+                color: var(--yellow);
+                top: 4%;
+                right: 31%;
+                font-size: 110px;
+                transform: rotate(-12deg);
+            }
+
+            .burst.two {
+                color: var(--mint);
+                top: 42%;
+                right: 1%;
+                font-size: 75px;
+                transform: rotate(13deg);
+            }
+
+            .burst.three {
+                color: var(--lavender);
+                bottom: 4%;
+                left: 2%;
+                font-size: 70px;
+                transform: rotate(-18deg);
+            }
+
+            .marquee {
+                background: var(--yellow);
+                border-bottom: 4px solid var(--ink);
+                border-top: 1px solid var(--ink);
+                overflow: hidden;
+            }
+
+            .marquee-inner {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 26px;
+                min-height: 60px;
+                font-size: 14px;
+                font-weight: 900;
+                letter-spacing: 1px;
+            }
+
+            .marquee-inner b {
+                font-size: 29px;
+                color: var(--blue);
+            }
+
+            .section {
+                padding: 85px 0 12px;
+            }
+
+            .section-title {
+                font-family: 'Baloo 2', cursive;
+                font-size: clamp(36px, 5vw, 61px);
+                line-height: 1.04;
+                font-weight: 800;
+                margin: 0 0 23px;
+                letter-spacing: -2px;
+            }
+
+            .kicker {
+                display: inline-block;
+                background: var(--orange);
+                border: 2px solid var(--ink);
+                border-radius: 100px;
+                box-shadow: 4px 4px 0 var(--ink);
+                padding: 7px 18px;
+                transform: rotate(-3deg);
+                font-size: 12px;
+                font-weight: 900;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                margin-bottom: 20px;
+            }
+
+            .about-grid {
+                display: grid;
+                grid-template-columns: 1.25fr .75fr;
+                gap: 28px;
+            }
+
+            .paper {
+                background: var(--cream);
+                border: 3px solid var(--ink);
+                border-radius: 21px;
+                box-shadow: 9px 10px 0 var(--ink);
+                padding: clamp(26px, 4vw, 48px);
+                position: relative;
+            }
+
+            .paper p {
+                font-size: 17px;
+                font-weight: 600;
+                line-height: 1.85;
+                margin: 0 0 15px;
+            }
+
+            .paper p:last-child {
+                margin: 0;
+            }
+
+            .about-right {
+                background: var(--mint);
+                transform: rotate(2deg);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                gap: 14px;
+            }
+
+            .about-right:before {
+                content: '✳';
+                position: absolute;
+                right: 20px;
+                top: 10px;
+                color: var(--orange);
+                font-size: 53px;
+            }
+
+            .mini-label {
+                font-weight: 900;
+                text-transform: uppercase;
+                letter-spacing: 1.3px;
+                font-size: 12px;
+            }
+
+            .person-name {
+                font-family: 'Baloo 2', cursive;
+                font-size: clamp(36px, 4vw, 52px);
+                font-weight: 800;
+                line-height: 1.06;
+            }
+
+            .person-id {
+                background: #fff;
+                border: 2px dashed var(--ink);
+                border-radius: 13px;
+                padding: 12px 15px;
+                font-weight: 900;
+                font-size: 16px;
+                align-self: flex-start;
+            }
+
+            .section-labs {
+                padding-top: 98px;
+            }
+
+            .lab-grid {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 22px;
+                margin-top: 30px;
+            }
+
+            .lab-card {
+                display: flex;
+                flex-direction: column;
+                min-height: 385px;
+                border: 3px solid var(--ink);
+                border-radius: 19px;
+                box-shadow: 9px 10px 0 var(--ink);
+                overflow: hidden;
+                background: #fff;
+                transition: transform .25s, box-shadow .25s;
+            }
+
+            .lab-card:hover {
+                transform: translateY(-7px) rotate(-1deg);
+                box-shadow: 12px 17px 0 var(--ink);
+            }
+
+            .lab-card:nth-child(2):hover {
+                transform: translateY(-7px) rotate(1deg);
+            }
+
+            .lab-top {
+                min-height: 160px;
+                position: relative;
+                border-bottom: 3px solid var(--ink);
+                padding: 21px 24px;
+                overflow: hidden;
+            }
+
+            .lab-card:nth-child(1) .lab-top {
+                background: var(--pink);
+            }
+
+            .lab-card:nth-child(2) .lab-top {
+                background: var(--yellow);
+            }
+
+            .lab-card:nth-child(3) .lab-top {
+                background: var(--lavender);
+            }
+
+            .lab-top:after {
+                content: '✦';
+                position: absolute;
+                font-size: 125px;
+                right: 17px;
+                top: -29px;
+                color: #ffffffa8;
+                text-shadow: 4px 4px 0 #17295828;
+                transform: rotate(20deg);
+            }
+
+            .lab-number {
+                position: relative;
+                z-index: 1;
+                font-family: 'Baloo 2', cursive;
+                font-size: 80px;
+                font-weight: 800;
+                line-height: 1;
+                letter-spacing: -5px;
+            }
+
+            .lab-top small {
+                position: relative;
+                z-index: 1;
+                display: block;
+                font-weight: 900;
+                letter-spacing: 1.2px;
+                font-size: 12px;
+            }
+
+            .lab-content {
+                padding: 27px 24px 25px;
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+            }
+
+            .lab-content h3 {
+                font-family: 'Baloo 2', cursive;
+                font-size: 26px;
+                font-weight: 800;
+                line-height: 1.08;
+                margin: 0 0 12px;
+            }
+
+            .lab-content p {
+                font-size: 14px;
+                line-height: 1.7;
+                margin: 0 0 20px;
+                font-weight: 700;
+            }
+
+            .lab-link {
+                background: var(--blue);
+                color: white;
+                text-decoration: none;
+                border: 2px solid var(--ink);
+                border-radius: 12px;
+                padding: 12px 16px;
+                margin-top: auto;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                font-weight: 900;
+                box-shadow: 4px 5px 0 var(--ink);
+                transition: background .2s;
+            }
+
+            .lab-link:hover {
+                background: #143ca5;
+            }
+
+            .lab-link span:last-child {
+                font-size: 22px;
+                line-height: 1;
+            }
+
+            .skills {
+                background: var(--deep);
+                color: white;
+                border-top: 4px solid var(--ink);
+                border-bottom: 4px solid var(--ink);
+                margin-top: 95px;
+                padding: 73px 0 82px;
+                position: relative;
+            }
+
+            .skills .kicker {
+                color: var(--ink);
+                background: var(--mint);
+            }
+
+            .skills .section-title {
+                color: var(--cream);
+            }
+
+            .skills-grid {
+                display: grid;
+                grid-template-columns: repeat(4, minmax(0,1fr));
+                gap: 16px;
+                margin-top: 28px;
+            }
+
+            .skill {
+                min-height: 165px;
+                border: 3px solid var(--ink);
+                border-radius: 16px;
+                padding: 19px 16px;
+                background: var(--cream);
+                color: var(--ink);
+                box-shadow: 6px 7px 0 #081f55;
+            }
+
+            .skill:nth-child(2) {
+                background: var(--mint);
+                transform: rotate(2deg);
+            }
+
+            .skill:nth-child(3) {
+                background: var(--yellow);
+                transform: rotate(-2deg);
+            }
+
+            .skill:nth-child(4) {
+                background: var(--pink);
+            }
+
+            .skill strong {
+                font-family: 'Baloo 2', cursive;
+                font-size: 23px;
+                display: block;
+                line-height: 1.15;
+            }
+
+            .skill p {
+                font-weight: 700;
+                font-size: 13px;
+                line-height: 1.6;
+                margin: 10px 0 0;
+            }
+
+            .reflection {
+                display: grid;
+                grid-template-columns: 0.7fr 1.3fr;
+                gap: 25px;
+                align-items: stretch;
+                margin: 76px 0;
+            }
+
+            .reflection-head {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                background: var(--orange);
+            }
+
+            .reflection-head .star-mark {
+                font-size: 80px;
+                line-height: 1;
+                margin-top: 14px;
+                filter: drop-shadow(4px 4px 0 var(--ink));
+            }
+
+            .reflection-body {
+                background: var(--cream);
+            }
+
+            .reflection-body p {
+                line-height: 1.9;
+                font-size: 16px;
+            }
+
+            footer {
+                background: var(--blue);
+                color: white;
+                padding: 38px 0;
+                border-top: 4px solid var(--ink);
+            }
+
+            .footer-inner {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+
+            footer strong {
+                font-family: 'Baloo 2', cursive;
+                font-size: 26px;
+            }
+
+            footer a {
+                text-decoration: none;
+                font-weight: 900;
+                background: var(--yellow);
+                color: var(--ink);
+                border: 2px solid var(--ink);
+                border-radius: 50px;
+                padding: 11px 18px;
+                box-shadow: 4px 4px 0 var(--ink);
+            }
+
+            @media (max-width: 990px) {
+                .headline {
+                    font-size: clamp(77px, 15vw, 145px);
+                }
+
+                .hero-inner {
+                    min-height: 550px;
+                }
+
+                .hero-tag--web {
+                    right: 5%;
+                    top: 36%;
+                }
+
+                .hero-tag--year {
+                    right: 4%;
+                    top: 5%;
+                    width: 124px;
+                    height: 124px;
+                    font-size: 22px;
+                }
+
+                .hero-tag--js {
+                    right: 6%;
+                    bottom: 10%;
+                    width: 120px;
+                    height: 105px;
+                    font-size: 48px;
+                }
+
+                .about-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .about-right {
+                    transform: none;
+                }
+
+                .lab-grid {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
+
+                .skills-grid {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
+            }
+
+            @media (max-width: 650px) {
+                .topbar-inner {
+                    padding: 13px 0;
+                    align-items: flex-start;
+                    flex-direction: column;
+                }
+
+                .nav {
+                    font-size: 12px;
+                    gap: 15px;
+                }
+
+                .nav .nav-cta {
+                    padding: 7px 12px;
+                }
+
+                .hero-inner {
+                    min-height: 455px;
+                    padding-top: 44px;
+                    padding-bottom: 50px;
+                }
+
+                .hero-eyebrow {
+                    margin-left: 0;
+                    font-size: 10px;
+                    letter-spacing: 1px;
+                }
+
+                .headline {
+                    font-size: clamp(65px, 16vw, 110px);
+                    letter-spacing: -4px;
+                    margin-top: 35px;
+                }
+
+                .headline span {
+                    border-width: 2px;
+                    box-shadow: 6px 7px 0 #0f327f;
+                }
+
+                .headline span:first-child {
+                    margin-left: 0;
+                }
+
+                .headline span:last-child {
+                    margin-left: 8%;
+                    margin-top: 9px;
+                }
+
+                .hero-desc {
+                    font-size: 13px;
+                    margin: 30px 0 0 6px;
+                    max-width: 70%;
+                }
+
+                .hero-tag--year {
+                    right: 0;
+                    width: 81px;
+                    height: 81px;
+                    font-size: 16px;
+                    border-width: 2px;
+                }
+
+                .hero-tag--web {
+                    width: 66px;
+                    height: 60px;
+                    font-size: 16px;
+                    top: 39%;
+                    right: 0;
+                    border-width: 2px;
+                }
+
+                .hero-tag--js {
+                    width: 75px;
+                    height: 65px;
+                    font-size: 30px;
+                    right: 2%;
+                    bottom: 7%;
+                    border-width: 2px;
+                }
+
+                .burst.one {
+                    font-size: 55px;
+                    right: 28%;
+                    top: 2%;
+                }
+
+                .burst.two {
+                    font-size: 38px;
+                    right: 2%;
+                    top: 56%;
+                }
+
+                .burst.three {
+                    font-size: 42px;
+                }
+
+                .marquee-inner {
+                    gap: 8px;
+                    font-size: 9px;
+                    min-height: 48px;
+                }
+
+                .marquee-inner b {
+                    font-size: 17px;
+                }
+
+                .section {
+                    padding-top: 55px;
+                }
+
+                .section-labs {
+                    padding-top: 65px;
+                }
+
+                .paper {
+                    padding: 25px;
+                    box-shadow: 6px 7px 0 var(--ink);
+                }
+
+                .paper p {
+                    font-size: 15px;
+                }
+
+                .lab-grid, .skills-grid, .reflection {
+                    grid-template-columns: 1fr;
+                }
+
+                .lab-card {
+                    min-height: 340px;
+                }
+
+                .skills {
+                    margin-top: 66px;
+                    padding: 55px 0 60px;
+                }
+
+                .reflection {
+                    margin: 54px 0;
+                }
+
+                .footer-inner {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                html {
+                    scroll-behavior: auto;
+                }
+
+                *, *:before, *:after {
+                    transition: none !important;
+                    animation: none !important;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="topbar" aria-label="Điều hướng chính">
+            <div class="wrap topbar-inner">
+                <a href="#home" class="logo">
+                    <span class="logo-mark" aria-hidden="true">S✳</span> SIU ĐEN NY <span aria-hidden="true">✦</span>
+                </a>
+                <div class="nav">
+                    <a href="#about">GIỚI THIỆU</a>
+                    <a href="#labs">BÀI LAB</a>
+                    <a href="#skills">KỸ NĂNG</a>
+                    <a href="https://github.com/D-nyii/Existing-Repository" target="_blank" rel="noopener noreferrer" class="nav-cta">GITHUB ↗</a>
+                </div>
+            </div>
+        </nav>
+        <header class="hero" id="home">
+            <div class="wrap hero-inner">
+                <p class="hero-eyebrow">✳ 2026 &nbsp; · &nbsp; WEB DEVELOPMENT &nbsp; · &nbsp; JAVASCRIPT LABS</p>
+                <h1 class="headline" aria-label="Portfolio">
+                    <span>PORT</span>
+                    <span>FOLIO</span>
+                </h1>
+                <p class="hero-desc">
+                    THỰC HÀNH JAVASCRIPT <span aria-hidden="true">✦</span> SÁNG TẠO, TƯƠNG TÁC & PHÁT TRIỂN WEB
+                </p>
+                <div class="hero-tag hero-tag--year" aria-hidden="true">
+                    LAB<br>08–10
+                </div>
+                <div class="hero-tag hero-tag--web" aria-hidden="true">&lt;/ &gt;</div>
+                <div class="hero-tag hero-tag--js" aria-hidden="true">JS!</div>
+                <span class="burst one" aria-hidden="true">★</span>
+                <span class="burst two" aria-hidden="true">✿</span>
+                <span class="burst three" aria-hidden="true">★</span>
+            </div>
+        </header>
+        <div class="marquee">
+            <div class="wrap marquee-inner">
+                <span>LEARN</span>
+                <b>✳</b>
+                <span>CREATE</span>
+                <b>★</b>
+                <span>CODE</span>
+                <b>✳</b>
+                <span>EXPLORE</span>
+                <b>★</b>
+                <span>GROW</span>
+            </div>
+        </div>
+        <main>
+            <section class="section wrap" id="about">
+                <span class="kicker">01 / ABOUT ME</span>
+                <div class="about-grid">
+                    <div class="paper">
+                        <h2 class="section-title">
+                            HELLO, MÌNH LÀ<br>SIU ĐEN NY! <span aria-hidden="true">✦</span>
+                        </h2>
+                        <p>
+                            Chào mừng đến với portfolio tổng hợp các bài thực hành JavaScript của học phần <strong>Phát triển ứng dụng Thương mại điện tử</strong>.
+                        </p>
+                        <p>Qua ba bài Lab, mình tìm hiểu JavaScript cơ bản, thao tác DOM, xử lý sự kiện và sử dụng jQuery để xây dựng những chức năng tương tác trên website.</p>
+                    </div>
+                    <aside class="paper about-right" aria-label="Thông tin sinh viên">
+                        <span class="mini-label">STUDENT PROFILE ✳</span>
+                        <div class="person-name">
+                            Siu<br>Đen Ny
+                        </div>
+                        <div class="person-id">MSSV: 31241026935</div>
+                        <p>
+                            <strong>Học phần:</strong>
+                            <br>Phát triển ứng dụng Thương mại điện tử
+                        </p>
+                        <p>
+                            <strong>Giảng viên:</strong>
+                            <br>TS. Nguyễn Mạnh Tuấn
+                        </p>
+                    </aside>
+                </div>
+            </section>
+            <section class="section section-labs wrap" id="labs">
+                <span class="kicker">02 / MY PROJECTS</span>
+                <h2 class="section-title">
+                    BỘ SƯU TẬP LABS <span aria-hidden="true">★</span>
+                </h2>
+                <div class="lab-grid">
+                    <article class="lab-card">
+                        <div class="lab-top">
+                            <small>JAVASCRIPT FOUNDATIONS</small>
+                            <div class="lab-number">08</div>
+                        </div>
+                        <div class="lab-content">
+                            <h3>
+                                Language<br>Foundations
+                            </h3>
+                            <p>11 bài thực hành về biến, dữ liệu, hàm, mảng, đối tượng và Browser Console.</p>
+                            <a class="lab-link" href="Lab08/">
+                                <span>KHÁM PHÁ LAB 08</span>
+                                <span aria-hidden="true">↗</span>
+                            </a>
+                        </div>
+                    </article>
+                    <article class="lab-card">
+                        <div class="lab-top">
+                            <small>DOM & USER INTERACTIONS</small>
+                            <div class="lab-number">09</div>
+                        </div>
+                        <div class="lab-content">
+                            <h3>
+                                DOM &<br>Events
+                            </h3>
+                            <p>8 bài thực hành về DOM, thay đổi giao diện, sự kiện và kiểm tra dữ liệu biểu mẫu.</p>
+                            <a class="lab-link" href="Lab09/">
+                                <span>KHÁM PHÁ LAB 09</span>
+                                <span aria-hidden="true">↗</span>
+                            </a>
+                        </div>
+                    </article>
+                    <article class="lab-card">
+                        <div class="lab-top">
+                            <small>JQUERY & ANIMATIONS</small>
+                            <div class="lab-number">10</div>
+                        </div>
+                        <div class="lab-content">
+                            <h3>
+                                jQuery &<br>AJAX
+                            </h3>
+                            <p>10 bài thực hành về selectors, sự kiện, hiệu ứng chuyển động, GET Requests và jqXHR.</p>
+                            <a class="lab-link" href="Lab10/">
+                                <span>KHÁM PHÁ LAB 10</span>
+                                <span aria-hidden="true">↗</span>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </section>
+            <section class="skills" id="skills">
+                <div class="wrap">
+                    <span class="kicker">03 / WHAT I LEARNED</span>
+                    <h2 class="section-title">
+                        SKILLS UNLOCKED! <span aria-hidden="true">✳</span>
+                    </h2>
+                    <div class="skills-grid">
+                        <div class="skill">
+                            <strong>
+                                JavaScript<br>Basics
+                            </strong>
+                            <p>Biến, kiểu dữ liệu, mảng, hàm và đối tượng.</p>
+                        </div>
+                        <div class="skill">
+                            <strong>
+                                DOM<br>Manipulation
+                            </strong>
+                            <p>Truy xuất, tạo và cập nhật phần tử HTML.</p>
+                        </div>
+                        <div class="skill">
+                            <strong>
+                                Events<br>&Forms
+                            </strong>
+                            <p>Tương tác người dùng và kiểm tra biểu mẫu.</p>
+                        </div>
+                        <div class="skill">
+                            <strong>
+                                jQuery<br>&AJAX
+                            </strong>
+                            <p>Hiệu ứng, GET Requests và xử lý phản hồi.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="wrap reflection" id="reflection">
+                <div class="paper reflection-head">
+                    <span class="mini-label">04 / REFLECTION</span>
+                    <h2 class="section-title">
+                        NHÌN LẠI<br>HÀNH TRÌNH
+                    </h2>
+                    <span class="star-mark" aria-hidden="true">✳</span>
+                </div>
+                <div class="paper reflection-body">
+                    <p>Qua ba bài Lab, mình đã hiểu rõ hơn cách JavaScript tạo ra sự tương tác trên website và cách tổ chức mã nguồn để dễ quản lý. Lab 08 giúp mình nắm những kiến thức nền tảng về biến, hàm và đối tượng. Lab 09 đặc biệt hữu ích vì các thao tác DOM và xử lý biểu mẫu có thể ứng dụng trực tiếp vào trang đăng ký tài khoản, giỏ hàng hoặc cập nhật nội dung sản phẩm trong thương mại điện tử. Lab 10 mang lại thử thách mới khi kết hợp jQuery, hiệu ứng và yêu cầu GET để xây dựng giao diện sinh động hơn. Trong thời gian tới, mình muốn luyện tập thêm về xử lý lỗi, làm việc với dữ liệu từ máy chủ và thiết kế giao diện đáp ứng tốt trên nhiều thiết bị.</p>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <div class="wrap footer-inner">
+                <div>
+                    <strong>THANKS FOR VISITING! ✦</strong>
+                    <div>JavaScript Labs Portfolio · Siu Đen Ny · 2026</div>
+                </div>
+                <a href="https://github.com/D-nyii/Existing-Repository" target="_blank" rel="noopener noreferrer">XEM GITHUB REPOSITORY ↗</a>
+            </div>
+        </footer>
+    </body>
+</html>
