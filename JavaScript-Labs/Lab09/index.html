@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="vi">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab09 · DOM &amp; Events | Siu Đen Ny</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap');
+:root{--blue:#2556d9;--deep:#12347f;--ink:#192a59;--cream:#fff9e9;--orange:#ff9f1c;--yellow:#ffe46c;--paper:#f9f4e8;--accent:#ffe46c}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper);font-family:Nunito,Arial,sans-serif}
+a{color:inherit}a:focus-visible{outline:3px dashed var(--orange);outline-offset:4px}
+.wrap{width:min(92%,1150px);margin:auto}
+nav{background:var(--cream);border-bottom:3px solid var(--ink)}
+.navrow{display:flex;gap:15px;align-items:center;justify-content:space-between;padding:17px 0}
+.logo{text-decoration:none;font-weight:900;font-size:20px}.logo b{display:inline-block;background:var(--orange);border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink);padding:5px 11px;border-radius:9px;transform:rotate(-5deg);margin-right:10px}
+.back{font-weight:900;text-decoration:none;background:var(--yellow);padding:9px 16px;border:2px solid var(--ink);border-radius:40px;box-shadow:4px 4px 0 var(--ink)}
+.hero{background:var(--blue);border-bottom:4px solid var(--ink);color:#fff;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 46px,#ffffff15 47px 48px),repeating-linear-gradient(90deg,transparent 0 46px,#ffffff15 47px 48px)}
+.hero-inner{position:relative;min-height:315px;display:flex;flex-wrap:wrap;gap:35px;align-items:center;justify-content:space-between;padding:50px 0}
+.eyebrow{font-size:13px;font-weight:900;letter-spacing:2px;margin:0 0 14px}
+h1{font:800 clamp(52px,7.7vw,102px)/.95 'Baloo 2',sans-serif;letter-spacing:-3px;margin:0;max-width:850px;text-shadow:5px 6px 0 #113478}
+h1 .sticker{display:inline-block;color:var(--orange);background:#fffefa;border:4px solid var(--ink);padding:10px 25px 0;transform:rotate(-3deg);box-shadow:8px 10px 0 #103077}
+.hero-text{font-size:16px;font-weight:800;margin:25px 0 0;max-width:680px}
+.decoration{font:800 70px 'Baloo 2',cursive;color:var(--yellow);transform:rotate(10deg);text-shadow:5px 6px 0 var(--ink);align-self:center}
+.marquee{background:var(--yellow);border-bottom:3px solid var(--ink);font-weight:900;text-align:center;padding:12px;letter-spacing:2px}
+main{padding:48px 0 80px}
+.intro{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap}
+.intro h2{font:800 clamp(32px,4vw,47px)/1.05 'Baloo 2',cursive;margin:0}
+.intro .count{background:var(--accent);border:3px solid var(--ink);border-radius:30px;padding:9px 16px;box-shadow:4px 4px 0 var(--ink);font-weight:900}
+.grid{margin-top:28px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.tile{background:#fffdf7;border:3px solid var(--ink);border-radius:18px;box-shadow:7px 8px 0 var(--ink);padding:23px;display:flex;flex-direction:column;min-height:204px;text-decoration:none;transition:transform .2s,box-shadow .2s}
+.tile:nth-child(4n+1){background:#fff0e2}.tile:nth-child(4n+2){background:#e4f8eb}.tile:nth-child(4n+3){background:#ece5ff}.tile:nth-child(4n){background:#fff8c8}
+.tile:hover{transform:translateY(-5px) rotate(-1deg);box-shadow:10px 13px 0 var(--ink)}
+.num{display:inline-block;align-self:flex-start;background:var(--orange);border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink);border-radius:9px;padding:4px 12px;font-weight:900;font-size:13px}
+.tile h3{font:800 24px/1.2 'Baloo 2',sans-serif;margin:20px 0 10px}
+.open{margin-top:auto;font-weight:900;color:var(--blue)}
+.tile.missing{opacity:.6;filter:grayscale(.35);cursor:not-allowed}.tile.missing .num{background:#ddd}.tile.missing .open{color:#626980}
+.note{margin-top:35px;background:var(--cream);border:2px dashed var(--ink);padding:20px 23px;border-radius:13px;line-height:1.7}
+footer{background:var(--deep);color:white;padding:30px 0;border-top:4px solid var(--ink);text-align:center;font-weight:800}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.decoration{font-size:46px}}
+@media(max-width:560px){.grid{grid-template-columns:1fr}.hero-inner{padding:45px 0}.decoration{display:none}.navrow{align-items:flex-start;flex-direction:column}.tile{min-height:170px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head>
+<body style="--accent:#ffe46c">
+<nav><div class="wrap navrow">
+<a class="logo" href="../index.html"><b>JS!</b> SIU ĐEN NY ✦</a>
+<a class="back" href="../index.html">← TRANG CHỦ</a>
+</div></nav>
+<header class="hero"><div class="wrap hero-inner"><div>
+<p class="eyebrow">✳ JAVASCRIPT 2 · JAVASCRIPT LABS</p>
+<h1><span class="sticker">LAB09</span></h1>
+<p class="hero-text">DOM &amp; Events — Chỉnh sửa HTML bằng DOM, xử lý sự kiện, thao tác biểu mẫu và kiểm tra dữ liệu.</p>
+</div><div class="decoration" aria-hidden="true">★ ✳</div></div></header>
+<div class="marquee">LEARN ✳ CODE ★ PRACTICE ✳ CREATE</div>
+<main class="wrap">
+<section aria-label="Danh sách bài thực hành">
+<div class="intro"><h2>CHỌN MỘT EXERCISE ✦</h2><span class="count">8 BÀI THỰC HÀNH</span></div>
+<div class="grid">
+        <a class="tile" data-files="[&quot;lab09-walkthrough01.html&quot;, &quot;Exercise01/index.html&quot;]" href="lab09-walkthrough01.html">
+          <span class="num">EXERCISE 9.1</span>
+          <h3>Basic DOM Selection</h3>
+          <span class="open">MỞ BÀI ↗</span>
+        </a>
+        <a class="tile" data-files="[&quot;lab09-walkthrough02.html&quot;, &quot;Exercise02/index.html&quot;]" href="lab09-walkthrough02.html">
+          <span class="num">EXERCISE 9.2</span>
+          <h3>DOM Family Relations</h3>
+          <span class="open">MỞ BÀI ↗</span>
+        </a>
+        <a class="tile" data-files="[&quot;lab09-walkthrough03.html&quot;, &quot;Exercise03/index.html&quot;]" href="lab09-walkthrough03.html">
+          <span class="num">EXERCISE 9.3</span>
+          <h3>Modifying the DOM</h3>
+          <span class="open">MỞ BÀI ↗</span>
+        </a>
+        <a class="tile" data-files="[&quot;lab09-walkthrough04.html&quot;, &quot;Exercise04/index.html&quot;]" href="lab09-walkthrough04.html">
+          <span class="num">EXERCISE 9.4</span>
+          <h3>Simple Event Handling</h3>
+          <span class="open">MỞ BÀI ↗</span>
+        </a>
+        <a class="tile" data-files="[&quot;lab09-walkthrough05.html&quot;, &quot;Exercise05/index.html&quot;]" href="lab09-walkthrough05.html">
+          <span class="num">EXERCISE 9.5</span>
+          <h3>Responding to Load Events</h3>
+          <span class="open">MỞ BÀI ↗</span>
+        </a>
+        <a class="tile" data-files="[&quot;lab09-walkthrough06.html&quot;, &quot;Exercise06/index.html&quot;]" href="lab09-walkthrough06.html">
+          <span class="num">EXERCISE 9.6</span>
+          <h3>Debugging Events</h3>
+          <span class="open">MỞ BÀI ↗</span>
+        </a>
+        <a class="tile" data-files="[&quot;lab09-walkthrough07.html&quot;, &quot;Exercise07/index.html&quot;]" href="lab09-walkthrough07.html">
+          <span class="num">EXERCISE 9.7</span>
+          <h3>Working with Forms</h3>
+          <span class="open">MỞ BÀI ↗</span>
+        </a>
+        <a class="tile" data-files="[&quot;lab09-walkthrough08.html&quot;, &quot;Exercise08/index.html&quot;]" href="lab09-walkthrough08.html">
+          <span class="num">EXERCISE 9.8</span>
+          <h3>Form Validation</h3>
+          <span class="open">MỞ BÀI ↗</span>
+        </a></div>
+</section>
+<p class="note"><strong>Lưu ý:</strong> Các thẻ sẽ tự kiểm tra tên file khi mở qua GitHub Pages. Nếu hiển thị “Chưa tìm thấy file”, hãy kiểm tra file HTML đã được đẩy lên GitHub và tên file có trùng với liên kết.</p>
+</main>
+<footer>✳ Lab09 · SIU ĐEN NY · <a href="../index.html">TRỞ VỀ PORTFOLIO</a></footer>
+<script>
+document.querySelectorAll(".tile").forEach(async function(link) {
+  const candidates = JSON.parse(link.dataset.files);
+  for (const filename of candidates) {
+    try {
+      const response = await fetch(filename, {method:"HEAD"});
+      if (response.ok) {
+        link.href = filename;
+        return;
+      }
+    } catch(err) {}
+  }
+  link.removeAttribute("href");
+  link.classList.add("missing");
+  link.setAttribute("aria-disabled", "true");
+  link.querySelector(".open").textContent = "CHƯA TÌM THẤY FILE";
+});
+</script>
+</body></html>
